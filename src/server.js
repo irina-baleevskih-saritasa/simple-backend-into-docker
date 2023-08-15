@@ -8,37 +8,48 @@ const port = 8000;
 
 const app = express();
 
+app.use(express.static('src'));
+
 app.get('/', (req, res) => {
-  res.setHeader("Content-Type", "text/html");
-  switch (req.url) {
-    case "/":
-      fs.readFile(__dirname + "/index.html")
-        .then(contents => {
-          res.writeHead(200);
-          res.end(contents);
-        })
-        .catch(err => {
-          console.error(`Could not read file: ${err}`);
-          res.writeHead(500);
-          res.end(err);
-        });
-      break
-    case "/page-one":
-      fs.readFile(__dirname + "/pages/page-one/index.html")
-        .then(contents => {
-          res.writeHead(200);
-          res.end(contents);
-        })
-        .catch(err => {
-          console.error(`Could not read file: ${err}`);
-          res.writeHead(500);
-          res.end(err);
-        });
-      break
-    default:
-        res.writeHead(404);
-        res.end(JSON.stringify({error:"Resource not found"}));
-    }
+  fs.readFile(__dirname + "/index.html")
+    .then(contents => {
+      res.setHeader("Content-Type", "text/html");
+      res.writeHead(200);
+      res.end(contents);
+    })
+    .catch(err => {
+      res.writeHead(500);
+      res.end(err);
+      return;
+    });
+});
+
+app.get('/first-page', (req, res) => {
+  fs.readFile(__dirname + "/pages/first-page/index.html")
+    .then(contents => {
+      res.setHeader("Content-Type", "text/html");
+      res.writeHead(200);
+      res.end(contents);
+    })
+    .catch(err => {
+      res.writeHead(500);
+      res.end(err);
+      return;
+    });
+});
+
+app.get('/second-page', (req, res) => {
+  fs.readFile(__dirname + "/pages/second-page/index.html")
+    .then(contents => {
+      res.setHeader("Content-Type", "text/html");
+      res.writeHead(200);
+      res.end(contents);
+    })
+    .catch(err => {
+      res.writeHead(500);
+      res.end(err);
+      return;
+    });
 });
 
 app.listen(port, host, () => {

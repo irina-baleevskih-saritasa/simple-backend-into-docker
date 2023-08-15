@@ -4,3 +4,18 @@
   align-items: center;
   justify-content: center;
 }
+
+.links-container {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  font-size: 16px;
+}
+
+.link {
+  padding: 8px;
+  border-radius: 4px;
+  color: black;
+  background-color: azure;
+  text-decoration: none;
+}
